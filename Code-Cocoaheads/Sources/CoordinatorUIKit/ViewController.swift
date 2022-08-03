@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var coordinator: CoordinatorUIKitDelegate?
+    weak var coordinator: CoordinatorUIKitDelegate?
     
     private lazy var firstButton: UIButton = {
         let button = UIButton()

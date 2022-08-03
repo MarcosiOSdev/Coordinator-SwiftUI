@@ -17,6 +17,12 @@ public protocol Coordinator: AnyObject {
     func dismiss(animated: Bool)
 }
 
+public extension Coordinator {
+    func onDismissed(coordinator: Coordinator) -> Void {
+        self.children.removeAll { $0 === coordinator }
+    }
+}
+
 class CoordinatorUIKit: Coordinator, CoordinatorUIKitDelegate {
     
     var rootViewController: ViewController?

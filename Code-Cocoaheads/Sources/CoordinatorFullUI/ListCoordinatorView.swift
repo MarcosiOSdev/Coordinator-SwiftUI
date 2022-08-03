@@ -10,7 +10,7 @@ import Combine
 
 class ListCoordinatorViewHostingController: UIHostingController<ListCoordinatorView> {
     public init() {
-        super.init(rootView: ListCoordinatorView(object: ListCoordinator()))
+        super.init(rootView: ListCoordinatorView(coordinator: ListCoordinator()))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,12 +37,12 @@ class ListCoordinator: ObservableObject, Identifiable {
 
 struct ListCoordinatorView: View {
 
-    @ObservedObject var object: ListCoordinator
+    @ObservedObject var coordinator: ListCoordinator
 
     var body: some View {
         NavigationView {
-            ListView(viewModel: object.listViewModel)
-                .navigation(item: $object.detailCoordinator) { $0.start() }
+            ListView(viewModel: coordinator.listViewModel)
+                .navigation(item: $coordinator.detailCoordinator) { $0.start() }
         }
     }
 }

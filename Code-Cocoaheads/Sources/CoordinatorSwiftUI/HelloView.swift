@@ -9,9 +9,20 @@ import SwiftUI
 
 struct HelloView: View {
     
+    weak var coordinator: CoordinatorSwiftUIDelegate?
+    
     var message: String
     
     var body: some View {
-        Text(message)
+        VStack {
+            Spacer()
+            Text(message).padding()
+            
+            Button("Ir pra Home") {
+                coordinator?.goToHome()
+            }.buttonStyle(.bordered)
+            Spacer()
+        }
+        .padding()
     }
 }

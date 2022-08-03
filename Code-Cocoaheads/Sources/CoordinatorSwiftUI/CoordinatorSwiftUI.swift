@@ -21,7 +21,7 @@ class CoordinatorSwiftUI: Coordinator {
     }
         
     func start(animated: Bool, onDismissed: (() -> Void)?) {
-        viewController = HelloViewHostingController(message: "Hello View First")
+        viewController = HelloViewHostingController(message: "Hello View First", coordinator: self)
         if let viewController = viewController {
             router.present(viewController, animated: true, onDismissed: onDismissed)
         }
@@ -32,10 +32,22 @@ class CoordinatorSwiftUI: Coordinator {
     }
 }
 
+extension CoordinatorSwiftUI: CoordinatorSwiftUIDelegate {}
+
+
+protocol CoordinatorSwiftUIDelegate: AnyObject {
+    func goToHome()
+}
+
+extension CoordinatorSwiftUIDelegate where Self: Coordinator {
+    func goToHome() {
+        self.dismiss(animated: true)
+    }
+}
 
 class HelloViewHostingController: UIHostingController<HelloView> {    
-    public init(message: String) {
-        let view = HelloView(message: message)
+    public init(message: String, coordinator: CoordinatorSwiftUIDelegate) {
+        let view = HelloView(coordinator: coordinator, message: message)
         super.init(rootView: view)
     }
     

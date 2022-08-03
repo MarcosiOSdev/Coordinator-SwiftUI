@@ -8,11 +8,10 @@
 import UIKit
 
 public protocol Router: AnyObject {
-    var navigationController: UINavigationControllerProtocol { get }
+    var navigationController: UINavigationController { get }
     func present(_ present: Presentable, animated: Bool)
     func present(_ present: Presentable, animated: Bool, onDismissed: (()->Void)?)
-    func dismiss(animated: Bool)
-    
+    func dismiss(animated: Bool)    
 }
 
 extension Router {

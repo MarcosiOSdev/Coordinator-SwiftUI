@@ -11,9 +11,10 @@ import UIKit
 func makeWindowAndCoordinator(
     scene: UIWindowScene? = nil
 ) -> (uiWindow: UIWindow, coordinator: Coordinator) {
-    let window = scene == nil ? UIWindow(frame: UIScreen.main.bounds) : UIWindow(windowScene: scene!)    
-    window.rootViewController = UINavigationController()
-    let navigationRouter = NavigationRouter(navigationController: window.rootViewController as! UINavigationController)
+    let window = scene == nil ? UIWindow(frame: UIScreen.main.bounds) : UIWindow(windowScene: scene!)
+    let navigationController = UINavigationController()
+    window.rootViewController = navigationController
+    let navigationRouter = NavigationRouter(navigationController: navigationController)
     let coordinator = CoordinatorUIKit(router: navigationRouter)
     coordinator.start(animated: true, onDismissed: nil)
     window.makeKeyAndVisible()

@@ -7,36 +7,12 @@
 
 import UIKit
 
-public protocol UINavigationControllerProtocol: AnyObject, Presentable {
-    var delegate: UINavigationControllerDelegate? { get set }
-    
-    func pushViewController(_ viewController: UIViewController, animated: Bool)
-    
-    @discardableResult
-    func popViewController(animated: Bool) -> UIViewController?
-    @discardableResult
-    func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
-    @discardableResult
-    func popToRootViewController(animated: Bool) -> [UIViewController]?
-    
-    var topViewController: UIViewController? { get }
-    var visibleViewController: UIViewController? { get }
-    
-    var viewControllers: [UIViewController] { get set }
-    
-    func setViewControllers(_ viewControllers: [UIViewController], animated: Bool)
-}
-
-extension UINavigationController: UINavigationControllerProtocol { }
-
-
-
 public class NavigationRouter: NSObject {
-    public let navigationController: UINavigationControllerProtocol
+    public let navigationController: UINavigationController
     private var routerRootController: UIViewController?
     private var onDismissForViewController: [UIViewController: (() -> Void)] = [:]
     
-    public init(navigationController: UINavigationControllerProtocol) {
+    public init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.routerRootController = navigationController.viewControllers.first
         super.init()
